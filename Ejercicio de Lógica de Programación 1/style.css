@@ -10,13 +10,13 @@ body
     box-shadow: 0 0 15px #00000066;
     display: flex;
     justify-content: space-evenly;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .card
 {
     position: relative;
-    font-size: 2rem;
+    font-size: 1.5rem;
     aspect-ratio: 1 / 1;
     border: 1px solid #434343;
     box-shadow: 0 0 15px #00000066;
@@ -24,4 +24,10 @@ body
     text-align: center;
     vertical-align: middle;
     padding: 1rem;
+}
+
+button
+{
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
 }
