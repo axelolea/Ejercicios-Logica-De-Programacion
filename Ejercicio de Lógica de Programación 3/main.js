@@ -1,34 +1,7 @@
+import { debounce, isNumeric } from "../common/common.js"
 const inputNumber = document.querySelector("#inputNumber")
 const outputNumber = document.querySelector("#outputNumber")
 const loadingItem = document.querySelector(".loading")
-const delayDebounce = 1000;
-
-// Implementacion de debounce en el input de la pagina con un clousure
-function debounce (doneFunc, timeout = delayDebounce){ // 300 miliseconds
-    // Variable para almacenar la referencia de nuestro ultimo timeout 
-    let timer;
-    // Regresamos una funcion donde recibe argumentos por rest 
-    return (...args) => {
-
-        // Si existe un timeout lo limpiamos 
-        if(timer) clearTimeout(timer);
-        
-        loadingItem.classList.remove("hidden")
-        
-        // Almacenamor el timer y creamos una funcion 
-        timer = setTimeout(
-            // Pasamos a nuestra funcion callback el contexto de ejecucion 
-            // del quien reciba la funcion return
-            () => doneFunc.apply(this, args),
-            timeout // Pasamos el tiempo de ejecucion 
-        )
-    }
-}
-
-// Funcion para verificar que es un numero
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
 // Recursion de cola para funcion factorial 
 function factorial(num, rest){
@@ -52,12 +25,16 @@ inputNumber.addEventListener("keyup",
         (e) => {
             loadingItem.classList.add("hidden")
             const value = e.target.value;
-            if(!isNumeric(value)) {
+            const factorialValue = factorial(value);
+            outputNumber.textContent = `${factorialValue}`
+        },
+        (e) => {
+            loadingItem.classList.remove("hidden")
+            if(!isNumeric(e.target.value)) {
+                loadingItem.classList.add("hidden")
                 outputNumber.textContent = "No es un numero valido";
-                return;
+                throw new Error("Error");
             }
-            const valor = factorial(value);
-            outputNumber.textContent = `${valor}`
         }
     )
 )
