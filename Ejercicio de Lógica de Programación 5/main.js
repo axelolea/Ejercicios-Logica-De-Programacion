@@ -76,8 +76,9 @@ class Game {
     getColor(num) {
         
         // Porcentaje de cercania con el numero correcto 
-        const value = (Math.abs(this.secretNumber - num) / this.cells)* 100
-        const percentage = Math.round(value);
+        const value = Math.round((Math.abs(this.secretNumber - num) / this.cells)* 100)
+        const percentage = Math.sqrt(~~value) * 10;
+
         // Convertir el número a un valor entre 0 y 255 (rango válido para RGB)
         const valorRojo = Math.round(percentage * 255 / 100);
         const valorVerde = Math.round((100 - percentage) * 255 / 100);
